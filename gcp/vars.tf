@@ -1,10 +1,10 @@
 variable "region" {
-  default = "us-west2"
+  default = "europe-west1"
 }
 
 variable "availability_zone" {
   description = "The zone where the cluster will be deployed [a,b,...]"
-  default     = ["a"]
+  default     = ["b"]
   type        = list(string)
 }
 
@@ -15,10 +15,17 @@ variable "instance_group_name" {
 
 variable "subnet" {
   description = "The name of the existing subnet where the machines will be deployed"
+  default = "redpanda-vm"
 }
 
 variable "project_name" {
   description = "The project name on GCP."
+  default = "ps-data-redpanda"
+}
+
+variable "allow_stopping_for_update" {
+  type        = bool
+  default     = false
 }
 
 variable "nodes" {
@@ -55,6 +62,7 @@ variable machine_type {
   # List of available machines per region/ zone:
   # https://cloud.google.com/compute/docs/regions-zones#available
   default = "n2-standard-2"
+  # default = "t2d-standard-2"
 }
 
 variable monitor_machine_type {
@@ -67,10 +75,12 @@ variable client_machine_type {
 
 variable "public_key_path" {
   description = "The ssh key."
+  default = "/home/jeremie/.ssh/id_rsa.pub"
 }
 
 variable "ssh_user" {
   description = "The ssh user. Must match the one in the public ssh key's comments."
+  default = "jeremie.bourseau@prestashop.com"
 }
 
 variable "enable_monitoring" {
